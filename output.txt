@@ -1,1 +1,3 @@
-hi
+dfs called for node5and SCC is6 7 5 
+dfs called for node4and SCC is4 
+dfs called for node1and SCC is2 3 1 
