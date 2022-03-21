@@ -9,8 +9,8 @@ void bellman(vector<vector<int> > edges, int n, int v) {
 			auto edge = edges[j];
 			if (d[edge[0]] < INF) {
 				if (d[edge[0]] + edge[2] < d[edge[1]]) {
-					d[edge[1]] = max(-INF , d[edge[0]] + edge[2]);
-					p[edge[1]] = edge[0];
+					d[edge[1]] = max(-INF , d[edge[0]] + edge[2]);//repetitive negative cycle may cause overlow thats why
+	 				p[edge[1]] = edge[0];
 					x = edge[1];
 				}
 			}
