@@ -21,6 +21,8 @@ int findParent(int node) {
 void _union_(int u , int v) {
 	u = findParent(u);
 	v = findParent(v);
+	
+	if(u==v) return ;
 
 	if (rank[u] < rank[v] {
 	parent[u] = v;
