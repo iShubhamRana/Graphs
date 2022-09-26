@@ -1,42 +1,29 @@
-#include <iostream>
+class DSU {
+public:
+    int N;
+    vector<int> par , rank;
+    DSU(int n) {
+        par.assign(n, 0);
+        rank.assign(n, 0);
+        N = n;
+        iota(par.begin(), par.end(), 0);
+    }
 
-int parent[100000];
-int rank[100000];
+    int findParent(int node) {
+        if (par[node] == node) return node;
+        return par[node] = findParent(par[node]);
+    }
 
-void makeSet(int n) {
-	for (int i = 0; i < n; i++) {
-		parent[i] = i;
-		rank[i] = 0;
-	}
-}
+  void _union(int p, int q) {
+            int i = findParent(p), j = findParent(q);
+            if (i == j) return;
+            if (rank[i] < rank[j]) {
+                par[i] = j;  
+            } else {
+                par[j] = i;
+                if (rank[i] == rank[j]) rank[i]++;
+            }
+          
+        }
 
-int findParent(int node) {
-	if (parent[node] == node)
-		return node;
-
-	return parent[node] = findParent(parent[node]);
-}
-
-
-void _union_(int u , int v) {
-	u = findParent(u);
-	v = findParent(v);
-	
-	if(u==v) return ;
-
-	if (rank[u] < rank[v] {
-	parent[u] = v;
-	}
-	else if (rank[u] > rank[v]) {
-	parent[v] = u;
-	}
-	else {
-		parent[v] = u;
-		rank[u]++;
-	}
-
-}
-
-int main() {
-	return 0;
-}
+};
