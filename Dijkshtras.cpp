@@ -1,34 +1,30 @@
-class Compare {
-public:
-    bool operator()(pair<int, int> &a , pair<int, int> b) {
-        return a.first > b.first;
-    }
-};
+const int N = 1e5 + 10;
+bool visited[N];
+vector<pi> adj[N];
+ll dist[N];
 
-vector<int> dijkshtras(int N, int s, vector<pair<int, int>> adj[]) {
 
-    priority_queue<pair<int, int>, vector<pair<int, int>> , Compare > q;
-    vector<int> dis(N, INT_MAX);
-    dis[s] = 0;
-    q.push(make_pair(0, s));
+void shortespath(int node) {
+    priority_queue<pair<ll, int> > q;
+    q.push({0, 1});
+    dist[1] = 0;
 
-    while (!q.empty()) {
-        auto x = q.top(); q.pop();
-        int prev = x.second;
+    while (q.size()) {
+        auto p = q.top(); q.pop();
+        int node = p.second;
 
-        for (auto edges : adj[prev]) {
-            int next = edges.first;
-            int nextDist = edges.second;
+        if (visited[node]) continue;
+        visited[node] = 1;
 
-            if (dis[next] > dis[prev] + nextDist) {
-                dis[next] = dis[prev] + nextDist;
-                q.push(make_pair(dis[next], next));
+        // v = {node, distance}
+        for (auto v : adj[node]) {
+            if (dist[v.first] > dist[node] + v.second) {
+                dist[v.first] = dist[node] + v.second;
+                q.push({ -dist[v.first] , v.first});
             }
-
         }
 
     }
 
-    return dis;
 }
 
